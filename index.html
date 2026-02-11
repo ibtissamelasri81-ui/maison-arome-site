@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Maison Arôme | Haute Parfumerie</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=Montserrat:wght@200;300;400&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --matte-black: #0a0a0a;
+            --gold-gradient: linear-gradient(45deg, #bf953f, #fcf6ba, #b38728, #fbf5b7, #aa771c);
+        }
+        body {
+            background-color: var(--matte-black);
+            color: #d1d1d1;
+            font-family: 'Montserrat', sans-serif;
+            scroll-behavior: smooth;
+        }
+        .serif { font-family: 'Playfair Display', serif; }
+        
+        .gold-text {
+            background: var(--gold-gradient);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .gold-btn {
+            background: var(--gold-gradient);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+        
+        .gold-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 20px rgba(191, 149, 63, 0.3);
+        }
+
+        .hero-glow {
+            background: radial-gradient(circle at center, #1a0f0a 0%, #0a0a0a 70%);
+        }
+
+        .fade-in {
+            animation: fadeIn 2s ease-in-out;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+    </style>
+</head>
+<body>
+
+    <nav class="fixed w-full z-50 flex justify-between items-center px-12 py-8 bg-gradient-to-b from-black/80 to-transparent">
+        <div class="text-2xl tracking-[0.3em] gold-text serif font-bold">MAISON ARÔME</div>
+        <div class="hidden md:flex space-x-8 text-[10px] tracking-[0.2em] uppercase transition-colors">
+            <a href="#" class="hover:text-yellow-500">Collections</a>
+            <a href="#" class="hover:text-yellow-500">L'Atelier</a>
+            <a href="#" class="hover:text-yellow-500">Histoire</a>
+            <a href="#" class="hover:text-yellow-500">Contact</a>
+        </div>
+    </nav>
+
+    <section class="h-screen flex flex-col items-center justify-center text-center hero-glow px-4">
+        <div class="fade-in">
+            <h2 class="text-sm tracking-[0.5em] mb-4 text-stone-500 uppercase">Haute Parfumerie Française</h2>
+            <h1 class="text-5xl md:text-7xl serif italic mb-8 gold-text">Le parfum qui vous ressemble.</h1>
+            
+            <div class="relative w-64 h-96 mx-auto mb-12 group">
+                <div class="absolute inset-0 bg-yellow-500/10 blur-[80px] rounded-full group-hover:bg-yellow-500/20 transition-all duration-700"></div>
+                <img src="https://images.unsplash.com/photo-1594035910387-fea47794261f?auto=format&fit=crop&q=80&w=800" 
+                     alt="Luxury Bottle" class="relative z-10 w-full h-full object-cover rounded-sm shadow-2xl grayscale hover:grayscale-0 transition-all duration-1000">
+            </div>
+
+            <button class="gold-btn px-10 py-4 text-black text-xs uppercase tracking-widest font-bold">
+                Créer mon parfum
+            </button>
+        </div>
+    </section>
+
+    <section class="py-24 bg-[#0f0f0f] px-12">
+        <div class="max-w-6xl mx-auto text-center mb-16">
+            <h2 class="serif text-4xl mb-4">L'Atelier Personnel</h2>
+            <p class="text-stone-500 font-light">Une immersion sensorielle en trois étapes.</p>
+        </div>
+        <div class="grid md:grid-cols-3 gap-12 text-center">
+            <div class="p-8 border border-stone-900 hover:border-stone-700 transition-all">
+                <span class="serif italic text-3xl gold-text">01</span>
+                <h3 class="mt-4 mb-2 uppercase tracking-tighter">L'Essence</h3>
+                <p class="text-xs text-stone-500 leading-relaxed">Choisissez votre note de cœur parmi nos récoltes privées.</p>
+            </div>
+            <div class="p-8 border border-stone-900 hover:border-stone-700 transition-all">
+                <span class="serif italic text-3xl gold-text">02</span>
+                <h3 class="mt-4 mb-2 uppercase tracking-tighter">L'Émotion</h3>
+                <p class="text-xs text-stone-500 leading-relaxed">Définissez l'intensité de votre sillage, de l'ombre à la lumière.</p>
+            </div>
+            <div class="p-8 border border-stone-900 hover:border-stone-700 transition-all">
+                <span class="serif italic text-3xl gold-text">03</span>
+                <h3 class="mt-4 mb-2 uppercase tracking-tighter">La Signature</h3>
+                <p class="text-xs text-stone-500 leading-relaxed">Gravez votre nom sur le cristal de votre flacon unique.</p>
+            </div>
+        </div>
+    </section>
+
+    <section class="py-32 grid md:grid-cols-2 items-center gap-16 px-12">
+        <div class="order-2 md:order-1">
+            <img src="https://images.unsplash.com/photo-1557170334-a7c3c467b930?auto=format&fit=crop&q=80&w=800" 
+                 alt="Perfumer" class="opacity-80 hover:opacity-100 transition-opacity duration-1000">
+        </div>
+        <div class="order-1 md:order-2 space-y-6">
+            <h2 class="serif text-5xl italic">Un héritage de silence et de senteurs.</h2>
+            <p class="text-stone-400 font-light leading-loose">
+                À travers les époques, la Maison Arôme a cultivé le secret. Celui d'une alchimie rare, où chaque goutte raconte un souvenir oublié, un désir inavoué. Nous ne créons pas des fragrances, nous capturons des âmes.
+            </p>
+            <a href="#" class="inline-block border-b border-yellow-700 pb-2 text-xs uppercase tracking-widest gold-text">Découvrir notre histoire</a>
+        </div>
+    </section>
+
+    <footer class="py-20 border-t border-stone-900 text-center">
+        <div class="text-xl serif gold-text mb-8">MAISON ARÔME</div>
+        <div class="flex justify-center space-x-6 mb-12">
+            <div class="w-8 h-8 rounded-full border border-stone-800 flex items-center justify-center hover:border-yellow-600 transition-colors cursor-pointer">IG</div>
+            <div class="w-8 h-8 rounded-full border border-stone-800 flex items-center justify-center hover:border-yellow-600 transition-colors cursor-pointer">FB</div>
+        </div>
+        <p class="text-[10px] text-stone-600 uppercase tracking-widest">&copy; 2026 Maison Arôme — Confidentialité & Mentions Légales</p>
+    </footer>
+
+</body>
+</html>
