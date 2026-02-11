@@ -1,129 +1,364 @@
 <!DOCTYPE html>
 <html lang="fr">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Maison Arôme | Haute Parfumerie</title>
-    <script src="https://cdn.tailwindcss.com"></script>
-    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=Montserrat:wght@200;300;400&display=swap" rel="stylesheet">
-    <style>
-        :root {
-            --matte-black: #0a0a0a;
-            --gold-gradient: linear-gradient(45deg, #bf953f, #fcf6ba, #b38728, #fbf5b7, #aa771c);
-        }
-        body {
-            background-color: var(--matte-black);
-            color: #d1d1d1;
-            font-family: 'Montserrat', sans-serif;
-            scroll-behavior: smooth;
-        }
-        .serif { font-family: 'Playfair Display', serif; }
-        
-        .gold-text {
-            background: var(--gold-gradient);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-        }
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>MAISON AROME</title>
+  
+  <!-- Fonts -->
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&family=Montserrat:wght@400;500&display=swap" rel="stylesheet">
 
-        .gold-btn {
-            background: var(--gold-gradient);
-            transition: transform 0.3s ease, box-shadow 0.3s ease;
-        }
-        
-        .gold-btn:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 10px 20px rgba(191, 149, 63, 0.3);
-        }
+  <!-- CSS -->
+  <style>
+    /* GLOBAL */
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+    body {
+      font-family: 'Montserrat', sans-serif;
+      background-color: #1c1412;
+      color: #f5e6c8;
+      line-height: 1.6;
+      overflow-x: hidden;
+    }
+    a { text-decoration: none; color: inherit; }
 
-        .hero-glow {
-            background: radial-gradient(circle at center, #1a0f0a 0%, #0a0a0a 70%);
-        }
+    /* HEADER */
+    header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 20px 50px;
+      border-bottom: 1px solid #c6a15b;
+      position: sticky;
+      top: 0;
+      background-color: #1c1412;
+      z-index: 100;
+    }
+    header h1 {
+      font-family: 'Playfair Display', serif;
+      color: #c6a15b;
+      font-size: 36px;
+    }
+    nav a {
+      margin-left: 30px;
+      font-weight: 500;
+      transition: color 0.3s;
+    }
+    nav a:hover { color: #f5e6c8; }
 
-        .fade-in {
-            animation: fadeIn 2s ease-in-out;
-        }
+    /* HERO SLIDER */
+    .hero-slider {
+      position: relative;
+      height: 80vh;
+      overflow: hidden;
+    }
+    .slide {
+      position: absolute;
+      width: 100%;
+      height: 100%;
+      background-size: cover;
+      background-position: center;
+      opacity: 0;
+      transition: opacity 1s ease-in-out;
+    }
+    .slide.active { opacity: 1; }
+    .hero-content {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      text-align: center;
+      z-index: 10;
+    }
+    .hero h2 {
+      font-family: 'Playfair Display', serif;
+      font-size: 48px;
+      margin-bottom: 20px;
+      animation: fadeInDown 1s ease forwards;
+    }
+    .hero p {
+      font-size: 20px;
+      margin-bottom: 30px;
+      animation: fadeInUp 1s ease forwards;
+      animation-delay: 0.5s;
+    }
+    .btn {
+      background-color: #c6a15b;
+      color: #1c1412;
+      padding: 15px 40px;
+      font-weight: bold;
+      border: none;
+      border-radius: 8px;
+      cursor: pointer;
+      transition: 0.3s;
+    }
+    .btn:hover { background-color: #f5e6c8; }
 
-        @keyframes fadeIn {
-            from { opacity: 0; transform: translateY(20px); }
-            to { opacity: 1; transform: translateY(0); }
-        }
-    </style>
+    @keyframes fadeInDown {
+      0% { opacity: 0; transform: translateY(-50px); }
+      100% { opacity: 1; transform: translateY(0); }
+    }
+    @keyframes fadeInUp {
+      0% { opacity: 0; transform: translateY(50px); }
+      100% { opacity: 1; transform: translateY(0); }
+    }
+
+    /* SECTIONS PRODUITS */
+    section {
+      padding: 80px 50px;
+      text-align: center;
+    }
+    section h3 {
+      font-family: 'Playfair Display', serif;
+      font-size: 36px;
+      margin-bottom: 40px;
+      color: #c6a15b;
+    }
+    .products {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 30px;
+    }
+    .product-card {
+      background-color: #2a1f1b;
+      border-radius: 12px;
+      padding: 20px;
+      width: 280px;
+      transform: translateY(50px);
+      opacity: 0;
+      transition: transform 0.6s ease, opacity 0.6s ease, box-shadow 0.3s, transform 0.3s;
+    }
+    .product-card.visible {
+      transform: translateY(0);
+      opacity: 1;
+    }
+    .product-card:hover {
+      transform: translateY(-10px);
+      box-shadow: 0 10px 20px rgba(198,161,91,0.5);
+    }
+    .product-card img {
+      width: 100%;
+      border-radius: 10px;
+      margin-bottom: 15px;
+    }
+    .product-card h4 {
+      font-family: 'Playfair Display', serif;
+      font-size: 22px;
+      margin-bottom: 10px;
+    }
+    .product-card p { font-size: 16px; margin-bottom: 15px; }
+
+    /* FOOTER */
+    footer {
+      background-color: #1c1412;
+      padding: 50px;
+      text-align: center;
+      border-top: 1px solid #c6a15b;
+    }
+    footer h4 {
+      font-family: 'Playfair Display', serif;
+      font-size: 24px;
+      margin-bottom: 20px;
+      color: #c6a15b;
+    }
+    .social-icons a {
+      margin: 0 10px;
+      font-size: 24px;
+      transition: color 0.3s;
+      cursor: pointer;
+    }
+    .social-icons a:hover { color: #c6a15b; }
+
+    /* POPUP */
+    .popup-overlay {
+      position: fixed;
+      top:0; left:0;
+      width: 100%; height:100%;
+      background: rgba(0,0,0,0.8);
+      display: none;
+      justify-content: center;
+      align-items: center;
+      z-index: 200;
+    }
+    .popup-overlay iframe {
+      width: 400px;
+      height: 700px;
+      border: none;
+      border-radius: 10px;
+    }
+    .popup-overlay .close-btn {
+      position: absolute;
+      top: 20px;
+      right: 30px;
+      font-size: 30px;
+      color: #f5e6c8;
+      cursor: pointer;
+    }
+
+    /* RESPONSIVE */
+    @media(max-width:768px) {
+      .products { flex-direction: column; align-items: center; }
+      header { flex-direction: column; }
+      nav a { margin: 10px; }
+      .hero h2 { font-size: 36px; }
+      .popup-overlay iframe { width: 90%; height: 80%; }
+    }
+  </style>
+
+  <!-- Icons -->
+  <script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
+
 </head>
 <body>
 
-    <nav class="fixed w-full z-50 flex justify-between items-center px-12 py-8 bg-gradient-to-b from-black/80 to-transparent">
-        <div class="text-2xl tracking-[0.3em] gold-text serif font-bold">MAISON ARÔME</div>
-        <div class="hidden md:flex space-x-8 text-[10px] tracking-[0.2em] uppercase transition-colors">
-            <a href="#" class="hover:text-yellow-500">Collections</a>
-            <a href="#" class="hover:text-yellow-500">L'Atelier</a>
-            <a href="#" class="hover:text-yellow-500">Histoire</a>
-            <a href="#" class="hover:text-yellow-500">Contact</a>
-        </div>
+  <!-- HEADER -->
+  <header>
+    <h1>MAISON AROME</h1>
+    <nav>
+      <a href="#parfums">Parfums</a>
+      <a href="#coffrets">Coffrets</a>
+      <a href="#cremes">Crèmes</a>
+      <a href="#contact">Contact</a>
     </nav>
+  </header>
 
-    <section class="h-screen flex flex-col items-center justify-center text-center hero-glow px-4">
-        <div class="fade-in">
-            <h2 class="text-sm tracking-[0.5em] mb-4 text-stone-500 uppercase">Haute Parfumerie Française</h2>
-            <h1 class="text-5xl md:text-7xl serif italic mb-8 gold-text">Le parfum qui vous ressemble.</h1>
-            
-            <div class="relative w-64 h-96 mx-auto mb-12 group">
-                <div class="absolute inset-0 bg-yellow-500/10 blur-[80px] rounded-full group-hover:bg-yellow-500/20 transition-all duration-700"></div>
-                <img src="https://images.unsplash.com/photo-1594035910387-fea47794261f?auto=format&fit=crop&q=80&w=800" 
-                     alt="Luxury Bottle" class="relative z-10 w-full h-full object-cover rounded-sm shadow-2xl grayscale hover:grayscale-0 transition-all duration-1000">
-            </div>
+  <!-- HERO SLIDER -->
+  <section class="hero-slider">
+    <div class="slide active" style="background-image: url('images/hero1.jpg');"></div>
+    <div class="slide" style="background-image: url('images/hero2.jpg');"></div>
+    <div class="slide" style="background-image: url('images/hero3.jpg');"></div>
 
-            <button class="gold-btn px-10 py-4 text-black text-xs uppercase tracking-widest font-bold">
-                Créer mon parfum
-            </button>
-        </div>
-    </section>
+    <div class="hero-content">
+      <h2>L’art du parfum à Rabat</h2>
+      <p>Découvrez nos parfums personnalisés et coffrets luxueux</p>
+      <button class="btn">Créer mon parfum</button>
+    </div>
+  </section>
 
-    <section class="py-24 bg-[#0f0f0f] px-12">
-        <div class="max-w-6xl mx-auto text-center mb-16">
-            <h2 class="serif text-4xl mb-4">L'Atelier Personnel</h2>
-            <p class="text-stone-500 font-light">Une immersion sensorielle en trois étapes.</p>
-        </div>
-        <div class="grid md:grid-cols-3 gap-12 text-center">
-            <div class="p-8 border border-stone-900 hover:border-stone-700 transition-all">
-                <span class="serif italic text-3xl gold-text">01</span>
-                <h3 class="mt-4 mb-2 uppercase tracking-tighter">L'Essence</h3>
-                <p class="text-xs text-stone-500 leading-relaxed">Choisissez votre note de cœur parmi nos récoltes privées.</p>
-            </div>
-            <div class="p-8 border border-stone-900 hover:border-stone-700 transition-all">
-                <span class="serif italic text-3xl gold-text">02</span>
-                <h3 class="mt-4 mb-2 uppercase tracking-tighter">L'Émotion</h3>
-                <p class="text-xs text-stone-500 leading-relaxed">Définissez l'intensité de votre sillage, de l'ombre à la lumière.</p>
-            </div>
-            <div class="p-8 border border-stone-900 hover:border-stone-700 transition-all">
-                <span class="serif italic text-3xl gold-text">03</span>
-                <h3 class="mt-4 mb-2 uppercase tracking-tighter">La Signature</h3>
-                <p class="text-xs text-stone-500 leading-relaxed">Gravez votre nom sur le cristal de votre flacon unique.</p>
-            </div>
-        </div>
-    </section>
+  <!-- PARFUMS -->
+  <section id="parfums">
+    <h3>Parfums personnalisés</h3>
+    <div class="products">
+      <div class="product-card">
+        <img src="images/parfum1.jpg" alt="Parfum 1">
+        <h4>Essence Royale</h4>
+        <p>Notes boisées et florales uniques</p>
+        <button class="btn">Découvrir</button>
+      </div>
+      <div class="product-card">
+        <img src="images/parfum2.jpg" alt="Parfum 2">
+        <h4>Élixir Mystique</h4>
+        <p>Subtil mélange oriental et floral</p>
+        <button class="btn">Découvrir</button>
+      </div>
+    </div>
+  </section>
 
-    <section class="py-32 grid md:grid-cols-2 items-center gap-16 px-12">
-        <div class="order-2 md:order-1">
-            <img src="https://images.unsplash.com/photo-1557170334-a7c3c467b930?auto=format&fit=crop&q=80&w=800" 
-                 alt="Perfumer" class="opacity-80 hover:opacity-100 transition-opacity duration-1000">
-        </div>
-        <div class="order-1 md:order-2 space-y-6">
-            <h2 class="serif text-5xl italic">Un héritage de silence et de senteurs.</h2>
-            <p class="text-stone-400 font-light leading-loose">
-                À travers les époques, la Maison Arôme a cultivé le secret. Celui d'une alchimie rare, où chaque goutte raconte un souvenir oublié, un désir inavoué. Nous ne créons pas des fragrances, nous capturons des âmes.
-            </p>
-            <a href="#" class="inline-block border-b border-yellow-700 pb-2 text-xs uppercase tracking-widest gold-text">Découvrir notre histoire</a>
-        </div>
-    </section>
+  <!-- COFFRETS -->
+  <section id="coffrets">
+    <h3>Coffrets cadeaux</h3>
+    <div class="products">
+      <div class="product-card">
+        <img src="images/coffret1.jpg" alt="Coffret 1">
+        <h4>Coffret Prestige</h4>
+        <p>Parfum + Crème parfumée + Miniature</p>
+        <button class="btn">Voir le coffret</button>
+      </div>
+      <div class="product-card">
+        <img src="images/coffret2.jpg" alt="Coffret 2">
+        <h4>Coffret Élégance</h4>
+        <p>Idéal pour offrir un luxe raffiné</p>
+        <button class="btn">Voir le coffret</button>
+      </div>
+    </div>
+  </section>
 
-    <footer class="py-20 border-t border-stone-900 text-center">
-        <div class="text-xl serif gold-text mb-8">MAISON ARÔME</div>
-        <div class="flex justify-center space-x-6 mb-12">
-            <div class="w-8 h-8 rounded-full border border-stone-800 flex items-center justify-center hover:border-yellow-600 transition-colors cursor-pointer">IG</div>
-            <div class="w-8 h-8 rounded-full border border-stone-800 flex items-center justify-center hover:border-yellow-600 transition-colors cursor-pointer">FB</div>
-        </div>
-        <p class="text-[10px] text-stone-600 uppercase tracking-widest">&copy; 2026 Maison Arôme — Confidentialité & Mentions Légales</p>
-    </footer>
+  <!-- CRÈMES -->
+  <section id="cremes">
+    <h3>Crèmes parfumées</h3>
+    <div class="products">
+      <div class="product-card">
+        <img src="images/creme1.jpg" alt="Crème 1">
+        <h4>Crème Douceur</h4>
+        <p>Prolonge votre parfum toute la journée</p>
+        <button class="btn">Découvrir</button>
+      </div>
+      <div class="product-card">
+        <img src="images/creme2.jpg" alt="Crème 2">
+        <h4>Crème Velours</h4>
+        <p>Texture luxueuse et hydratante</p>
+        <button class="btn">Découvrir</button>
+      </div>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer id="contact">
+    <h4>Nous suivre</h4>
+    <div class="social-icons">
+      <a class="social-link" data-platform="instagram"><i class="fab fa-instagram"></i></a>
+      <a class="social-link" data-platform="tiktok"><i class="fab fa-tiktok"></i></a>
+      <a href="https://www.facebook.com/"><i class="fab fa-facebook-f"></i></a>
+    </div>
+    <p>MAISON AROME – Rabat, Maroc</p>
+    <p>&copy; 2026 Tous droits réservés</p>
+  </footer>
+
+  <!-- POPUP -->
+  <div class="popup-overlay" id="popup">
+    <span class="close-btn" id="closePopup">&times;</span>
+    <iframe id="popupIframe" src=""></iframe>
+  </div>
+
+  <!-- JS -->
+  <script>
+    // SLIDER
+    let slides = document.querySelectorAll('.slide');
+    let currentSlide = 0;
+    setInterval(() => {
+      slides[currentSlide].classList.remove('active');
+      currentSlide = (currentSlide + 1) % slides.length;
+      slides[currentSlide].classList.add('active');
+    }, 5000);
+
+    // ANIMATION PRODUCTS ON SCROLL
+    const productCards = document.querySelectorAll('.product-card');
+    const observer = new IntersectionObserver(entries => {
+      entries.forEach(entry => {
+        if(entry.isIntersecting){
+          entry.target.classList.add('visible');
+        }
+      });
+    }, { threshold: 0.2 });
+    productCards.forEach(card => observer.observe(card));
+
+    // SOCIAL POPUP
+    const socialLinks = document.querySelectorAll('.social-link');
+    const popup = document.getElementById('popup');
+    const iframe = document.getElementById('popupIframe');
+    const closePopup = document.getElementById('closePopup');
+
+    socialLinks.forEach(link => {
+      link.addEventListener('click', () => {
+        const platform = link.dataset.platform;
+        if(platform === 'instagram'){
+          iframe.src = 'https://www.instagram.com/maisonarome/?embed=true';
+        } else if(platform === 'tiktok'){
+          iframe.src = 'https://www.tiktok.com/@maisonarome';
+        }
+        popup.style.display = 'flex';
+      });
+    });
+
+    closePopup.addEventListener('click', () => {
+      popup.style.display = 'none';
+      iframe.src = '';
+    });
+  </script>
 
 </body>
 </html>
