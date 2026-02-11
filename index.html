@@ -1,187 +1,161 @@
-<!DOCTYPE html>
-<html lang="fr">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Maison Arôme | L'Essence de la Lumière</title>
-    <script src="https://cdn.tailwindcss.com"></script>
-    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=Montserrat:wght@300;400;500&display=swap" rel="stylesheet">
-    <style>
-        :root {
-            --bg-warm: #f9f5f0;
-            --soft-cream: #ffffff;
-            --mocha: #6d5a4b;
-            --gold-soft: #c5a059;
-            --nude-shadow: rgba(109, 90, 75, 0.08);
-        }
+<style>
+/* GLOBAL */
+* { box-sizing: border-box; margin: 0; padding: 0; }
+body {
+  font-family: 'Montserrat', sans-serif;
+  background-color: #f5f0e6; /* fond clair */
+  color: #3c2f2f; /* texte sombre mais doux */
+  line-height: 1.6;
+  overflow-x: hidden;
+}
+a { text-decoration: none; color: inherit; }
 
-        body {
-            background-color: var(--bg-warm);
-            color: var(--mocha);
-            font-family: 'Montserrat', sans-serif;
-            overflow-x: hidden;
-        }
+/* HEADER */
+header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 20px 50px;
+  border-bottom: 1px solid #c6a15b;
+  position: sticky;
+  top: 0;
+  background-color: #fff8f0; /* header clair */
+  z-index: 100;
+}
+header h1 {
+  font-family: 'Playfair Display', serif;
+  color: #c6a15b;
+  font-size: 36px;
+}
+nav a { margin-left: 30px; font-weight: 500; transition: color 0.3s; }
+nav a:hover { color: #c6a15b; }
 
-        .serif { font-family: 'Playfair Display', serif; }
+/* HERO SLIDER */
+.hero-slider {
+  position: relative;
+  height: 80vh;
+  overflow: hidden;
+}
+.slide {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  background-size: cover;
+  background-position: center;
+  opacity: 0;
+  transition: opacity 1s ease-in-out;
+}
+.slide.active { opacity: 1; }
+.hero-content {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  text-align: center;
+  z-index: 10;
+  color: #3c2f2f;
+}
+.hero h2 {
+  font-family: 'Playfair Display', serif;
+  font-size: 48px;
+  margin-bottom: 20px;
+  animation: fadeInDown 1s ease forwards;
+}
+.hero p {
+  font-size: 20px;
+  margin-bottom: 30px;
+  animation: fadeInUp 1s ease forwards;
+  animation-delay: 0.5s;
+}
+.btn {
+  background-color: #c6a15b;
+  color: #fff8f0;
+  padding: 15px 40px;
+  font-weight: bold;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: 0.3s;
+}
+.btn:hover { background-color: #3c2f2f; color: #f5f0e6; }
 
-        /* Effet de lumière dorée douce */
-        .hero-light {
-            background: radial-gradient(circle at 50% 50%, rgba(255, 255, 255, 0.8) 0%, rgba(249, 245, 240, 0) 70%);
-        }
+/* SECTIONS PRODUITS */
+section {
+  padding: 80px 50px;
+  text-align: center;
+}
+section h3 {
+  font-family: 'Playfair Display', serif;
+  font-size: 36px;
+  margin-bottom: 40px;
+  color: #c6a15b;
+}
+.products {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 30px;
+}
+.product-card {
+  background-color: #fff8f0;
+  border-radius: 12px;
+  padding: 20px;
+  width: 280px;
+  transform: translateY(50px);
+  opacity: 0;
+  transition: transform 0.6s ease, opacity 0.6s ease, box-shadow 0.3s, transform 0.3s;
+}
+.product-card.visible { transform: translateY(0); opacity: 1; }
+.product-card:hover {
+  transform: translateY(-10px);
+  box-shadow: 0 10px 20px rgba(198,161,91,0.5);
+}
+.product-card img { width: 100%; border-radius: 10px; margin-bottom: 15px; }
+.product-card h4 { font-family: 'Playfair Display', serif; font-size: 22px; margin-bottom: 10px; }
+.product-card p { font-size: 16px; margin-bottom: 15px; }
 
-        /* Bouton Or Arrondi */
-        .btn-gold {
-            background-color: var(--gold-soft);
-            color: white;
-            border-radius: 50px;
-            transition: all 0.4s cubic-bezier(0.165, 0.84, 0.44, 1);
-        }
+/* FOOTER */
+footer {
+  background-color: #fff8f0;
+  padding: 50px;
+  text-align: center;
+  border-top: 1px solid #c6a15b;
+  color: #3c2f2f;
+}
+footer h4 {
+  font-family: 'Playfair Display', serif;
+  font-size: 24px;
+  margin-bottom: 20px;
+  color: #c6a15b;
+}
+.social-icons a { margin: 0 10px; font-size: 24px; transition: color 0.3s; cursor: pointer; }
+.social-icons a:hover { color: #c6a15b; }
 
-        .btn-gold:hover {
-            background-color: #b38e4a;
-            transform: scale(1.05);
-            box-shadow: 0 10px 20px var(--nude-shadow);
-        }
+/* POPUP */
+.popup-overlay {
+  position: fixed; top:0; left:0;
+  width: 100%; height:100%;
+  background: rgba(0,0,0,0.7);
+  display: none; justify-content: center; align-items: center;
+  z-index: 200;
+}
+.popup-overlay iframe {
+  width: 400px; height: 700px; border: none; border-radius: 10px;
+}
+.popup-overlay .close-btn {
+  position: absolute; top: 20px; right: 30px; font-size: 30px; color: #3c2f2f; cursor: pointer;
+}
 
-        /* Cartes de produits avec ombres délicates */
-        .product-card {
-            background: white;
-            transition: transform 0.5s ease;
-            box-shadow: 0 15px 35px var(--nude-shadow);
-        }
+/* ANIMATIONS */
+@keyframes fadeInDown {0% {opacity:0; transform:translateY(-50px);} 100% {opacity:1; transform:translateY(0);}}
+@keyframes fadeInUp {0% {opacity:0; transform:translateY(50px);} 100% {opacity:1; transform:translateY(0);}}
 
-        .product-card:hover {
-            transform: translateY(-10px);
-        }
-
-        /* Animations de fondu */
-        .reveal {
-            opacity: 0;
-            transform: translateY(30px);
-            transition: all 1s ease-out;
-        }
-
-        .reveal.active {
-            opacity: 1;
-            transform: translateY(0);
-        }
-
-        /* Bordures subtiles */
-        .border-soft { border-color: rgba(109, 90, 75, 0.1); }
-    </style>
-</head>
-<body>
-
-    <nav class="fixed w-full z-50 flex justify-between items-center px-8 md:px-20 py-6 bg-white/30 backdrop-blur-md">
-        <div class="text-xs uppercase tracking-[0.3em] font-medium">Collections</div>
-        <div class="text-2xl tracking-[0.2em] serif font-bold text-[#4a3f35]">MAISON ARÔME</div>
-        <div class="text-xs uppercase tracking-[0.3em] font-medium">Panier (0)</div>
-    </nav>
-
-    <section class="relative h-screen flex flex-col items-center justify-center text-center hero-light overflow-hidden">
-        <div class="z-10 px-4">
-            <h2 class="text-xs tracking-[0.4em] mb-6 text-stone-400 uppercase">La Renaissance des Sens</h2>
-            <h1 class="text-4xl md:text-6xl serif italic mb-10 text-[#4a3f35]">Le parfum qui vous ressemble.</h1>
-            
-            <div class="relative w-72 h-96 mx-auto mb-12">
-                <div class="absolute inset-0 bg-white/40 blur-3xl rounded-full"></div>
-                <img src="https://images.unsplash.com/photo-1592945403244-b3fbafd7f539?auto=format&fit=crop&q=80&w=800" 
-                     alt="Perfume Bottle" class="relative z-10 w-full h-full object-contain drop-shadow-2xl">
-            </div>
-
-            <button class="btn-gold px-12 py-4 text-xs uppercase tracking-widest font-semibold">
-                Créer mon parfum
-            </button>
-        </div>
-        
-        <div class="absolute bottom-0 w-full h-32 bg-gradient-to-t from-white to-transparent opacity-50"></div>
-    </section>
-
-    <section class="py-24 bg-white px-8 md:px-20">
-        <div class="max-w-4xl mx-auto flex flex-col md:flex-row items-center gap-16">
-            <div class="md:w-1/2">
-                <h3 class="text-xs uppercase tracking-widest text-stone-400 mb-4">L'Atelier de Création</h3>
-                <h2 class="serif text-4xl mb-6">Un sillage unique, guidé par vos émotions.</h2>
-                <p class="text-stone-500 font-light leading-relaxed mb-8">
-                    Répondez à notre questionnaire sensoriel et laissez nos algorithmes d'exception assembler les essences qui résonnent avec votre histoire.
-                </p>
-                <div class="space-y-4">
-                    <div class="flex items-center gap-4 text-sm"><span class="w-8 h-[1px] bg-stone-300"></span> 1. Analyse de vos notes préférées</div>
-                    <div class="flex items-center gap-4 text-sm"><span class="w-8 h-[1px] bg-stone-300"></span> 2. Sélection de l'intensité</div>
-                    <div class="flex items-center gap-4 text-sm"><span class="w-8 h-[1px] bg-stone-300"></span> 3. Flacon personnalisé</div>
-                </div>
-            </div>
-            <div class="md:w-1/2 bg-[#fdfaf7] p-4 rounded-full border border-stone-100 shadow-inner">
-                <img src="https://images.unsplash.com/photo-1615108485203-911802905330?auto=format&fit=crop&q=80&w=800" 
-                     alt="Expérience" class="rounded-full h-[400px] w-full object-cover shadow-lg">
-            </div>
-        </div>
-    </section>
-
-    <section class="py-24 px-8 md:px-20 bg-[#f9f5f0]">
-        <h2 class="serif text-3xl text-center mb-16">Nos Essences Iconiques</h2>
-        <div class="grid grid-cols-1 md:grid-cols-3 gap-12">
-            <div class="product-card p-6 rounded-sm text-center">
-                <img src="https://images.unsplash.com/photo-1541643600914-78b084683601?auto=format&fit=crop&q=80&w=600" class="w-full h-80 object-cover mb-6">
-                <h4 class="serif italic text-xl">Aube de Soie</h4>
-                <p class="text-[10px] tracking-widest uppercase text-stone-400 my-2">Jasmin • Vanille • Musc</p>
-                <p class="text-sm font-semibold mt-4">145,00 €</p>
-            </div>
-            <div class="product-card p-6 rounded-sm text-center">
-                <img src="https://images.unsplash.com/photo-1594035910387-fea47794261f?auto=format&fit=crop&q=80&w=600" class="w-full h-80 object-cover mb-6">
-                <h4 class="serif italic text-xl">Moka Poudré</h4>
-                <p class="text-[10px] tracking-widest uppercase text-stone-400 my-2">Café • Ambre • Santal</p>
-                <p class="text-sm font-semibold mt-4">160,00 €</p>
-            </div>
-            <div class="product-card p-6 rounded-sm text-center">
-                <img src="https://images.unsplash.com/photo-1563170351-be82bc888bb4?auto=format&fit=crop&q=80&w=600" class="w-full h-80 object-cover mb-6">
-                <h4 class="serif italic text-xl">Éclat d'Or</h4>
-                <p class="text-[10px] tracking-widest uppercase text-stone-400 my-2">Bergamote • Néroli</p>
-                <p class="text-sm font-semibold mt-4">135,00 €</p>
-            </div>
-        </div>
-    </section>
-
-    <footer class="bg-white py-16 border-t border-soft">
-        <div class="max-w-6xl mx-auto px-8 grid md:grid-cols-4 gap-12 text-sm text-stone-500">
-            <div>
-                <h5 class="serif text-lg text-[#4a3f35] mb-4">Maison Arôme</h5>
-                <p class="leading-relaxed">Une invitation au voyage sensoriel au cœur de Paris.</p>
-            </div>
-            <div>
-                <h6 class="uppercase tracking-widest text-xs font-bold mb-4 text-[#4a3f35]">Aide</h6>
-                <ul class="space-y-2">
-                    <li>Livraison</li>
-                    <li>Retours</li>
-                    <li>FAQ</li>
-                </ul>
-            </div>
-            <div>
-                <h6 class="uppercase tracking-widest text-xs font-bold mb-4 text-[#4a3f35]">Suivez-nous</h6>
-                <div class="flex space-x-4">
-                    <span class="hover:text-[#c5a059] cursor-pointer transition-colors">Instagram</span>
-                    <span class="hover:text-[#c5a059] cursor-pointer transition-colors">Pinterest</span>
-                </div>
-            </div>
-            <div>
-                <h6 class="uppercase tracking-widest text-xs font-bold mb-4 text-[#4a3f35]">Newsletter</h6>
-                <input type="email" placeholder="Votre email" class="w-full border-b border-stone-200 py-2 focus:outline-none focus:border-[#c5a059] bg-transparent">
-            </div>
-        </div>
-    </footer>
-
-    <script>
-        // Simple Scroll Reveal Effect
-        window.addEventListener('scroll', () => {
-            const reveals = document.querySelectorAll('.reveal');
-            reveals.forEach(el => {
-                const windowHeight = window.innerHeight;
-                const revealTop = el.getBoundingClientRect().top;
-                if (revealTop < windowHeight - 150) {
-                    el.classList.add('active');
-                }
-            });
-        });
-    </script>
-</body>
-</html>
+/* RESPONSIVE */
+@media(max-width:768px){
+  .products{ flex-direction: column; align-items:center; }
+  header{ flex-direction: column; }
+  nav a{ margin:10px; }
+  .hero h2{ font-size:36px; }
+  .popup-overlay iframe{ width:90%; height:80%; }
+}
+</style>
