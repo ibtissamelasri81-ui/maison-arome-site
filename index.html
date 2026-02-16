@@ -3,109 +3,234 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
 <title>MAISON AROME - Parfumerie de Luxe</title>
+
+<!-- Google Fonts -->
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&family=Montserrat:wght@300;400&display=swap" rel="stylesheet">
 
 <style>
 
-body {
-    margin: 0;
-    font-family: 'Georgia', serif;
-    background: #ffffff;
-    color: #333;
+/* =========================
+   GLOBAL
+========================= */
+
+body{
+    margin:0;
+    background:#FFFFFF;
+    font-family:'Montserrat', sans-serif;
+    color:#333;
+    scroll-behavior:smooth;
 }
 
-/* HEADER */
-header {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 20px 50px;
-    border-bottom: 1px solid #eee;
+h1,h2,h3{
+    font-family:'Playfair Display', serif;
+    font-weight:600;
 }
 
-.logo {
-    font-size: 24px;
-    color: #D4AF37;
-    font-weight: bold;
+section{
+    padding:100px 8%;
 }
 
-nav a {
-    margin: 0 15px;
-    text-decoration: none;
-    color: #333;
-    cursor: pointer;
-    transition: 0.3s;
+.gold{ color:#D4AF37; }
+
+.btn-gold{
+    background:#D4AF37;
+    color:white;
+    padding:14px 35px;
+    border:none;
+    cursor:pointer;
+    transition:0.4s;
+    letter-spacing:1px;
 }
 
-nav a:hover {
-    color: #D4AF37;
+.btn-gold:hover{
+    transform:scale(1.05);
+    box-shadow:0 0 20px rgba(212,175,55,0.6);
 }
 
-.panier {
-    color: #D4AF37;
+/* =========================
+   HEADER
+========================= */
+
+header{
+    position:fixed;
+    width:100%;
+    top:0;
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    padding:20px 8%;
+    transition:0.4s;
+    z-index:1000;
 }
 
-/* SECTIONS */
-section {
-    display: none;
-    padding: 80px 20px;
-    text-align: center;
+header.scrolled{
+    background:white;
+    box-shadow:0 4px 20px rgba(0,0,0,0.05);
 }
 
-.active {
-    display: block;
+.logo{
+    font-family:'Playfair Display';
+    font-size:24px;
+    color:#D4AF37;
 }
 
-/* HERO */
-.hero {
-    padding: 120px 20px;
+nav a{
+    margin:0 15px;
+    text-decoration:none;
+    color:#333;
+    position:relative;
+    transition:0.4s;
 }
 
-.btn {
-    background: #D4AF37;
-    color: white;
-    padding: 12px 30px;
-    border: none;
-    cursor: pointer;
-    text-decoration: none;
-    transition: 0.4s;
+nav a:after{
+    content:"";
+    position:absolute;
+    width:0%;
+    height:2px;
+    background:#D4AF37;
+    left:0;
+    bottom:-5px;
+    transition:0.4s;
 }
 
-.btn:hover {
-    background: #b9972f;
+nav a:hover:after{
+    width:100%;
 }
 
-/* CARDS */
-.cards {
-    display: flex;
-    justify-content: center;
-    gap: 40px;
-    margin-top: 40px;
-    flex-wrap: wrap;
+/* =========================
+   HERO
+========================= */
+
+.hero{
+    height:100vh;
+    background:linear-gradient(rgba(212,175,55,0.15),rgba(212,175,55,0.15)),
+               url('https://images.unsplash.com/photo-1585386959984-a41552231658');
+    background-size:cover;
+    background-position:center;
+    display:flex;
+    flex-direction:column;
+    justify-content:center;
+    align-items:center;
+    text-align:center;
+    color:white;
 }
 
-.card {
-    padding: 40px;
-    border: 1px solid #eee;
-    width: 220px;
-    transition: 0.4s;
-    cursor: pointer;
+.hero h1{
+    font-size:48px;
 }
 
-.card:hover {
-    transform: translateY(-5px);
-    border-color: #D4AF37;
+.scroll-indicator{
+    margin-top:40px;
+    animation: bounce 2s infinite;
 }
 
-/* PRODUIT */
-.detail {
-    max-width: 500px;
-    margin: auto;
+@keyframes bounce{
+    0%,100%{transform:translateY(0);}
+    50%{transform:translateY(10px);}
 }
 
-.quantite button {
-    padding: 5px 12px;
-    margin: 10px;
+/* =========================
+   CARDS
+========================= */
+
+.cards{
+    display:grid;
+    grid-template-columns:repeat(auto-fit,minmax(280px,1fr));
+    gap:40px;
+}
+
+.card{
+    background:#F6F2E8;
+    padding:40px;
+    text-align:center;
+    transition:0.4s;
+    box-shadow:0 10px 30px rgba(0,0,0,0.05);
+    position:relative;
+}
+
+.card:hover{
+    transform:translateY(-10px);
+    box-shadow:0 20px 40px rgba(0,0,0,0.08);
+}
+
+.badge{
+    position:absolute;
+    top:15px;
+    right:15px;
+    background:#D4AF37;
+    color:white;
+    padding:5px 10px;
+    font-size:12px;
+}
+
+/* =========================
+   TIMELINE
+========================= */
+
+.timeline{
+    display:flex;
+    justify-content:space-between;
+    flex-wrap:wrap;
+    margin-top:60px;
+}
+
+.timeline div{
+    flex:1;
+    text-align:center;
+    padding:20px;
+}
+
+/* =========================
+   FAQ
+========================= */
+
+.faq-item{
+    border-bottom:1px solid #eee;
+    padding:15px 0;
+    cursor:pointer;
+}
+
+.faq-answer{
+    display:none;
+    padding-top:10px;
+    color:#666;
+}
+
+/* =========================
+   CONTACT
+========================= */
+
+input,textarea{
+    width:100%;
+    padding:12px;
+    margin:10px 0;
+    border:1px solid #ddd;
+}
+
+/* =========================
+   FOOTER
+========================= */
+
+footer{
+    background:#2A2A2A;
+    color:white;
+    padding:60px 8%;
+}
+
+.footer-grid{
+    display:grid;
+    grid-template-columns:repeat(auto-fit,minmax(200px,1fr));
+    gap:40px;
+}
+
+footer h3{
+    color:#D4AF37;
+}
+
+@media(max-width:768px){
+    .hero h1{font-size:32px;}
 }
 
 </style>
@@ -113,140 +238,134 @@ section {
 
 <body>
 
-<header>
-    <div class="logo">MAISON AROME</div>
+<header id="header">
+<nav>
+<a href="#parfums">PARFUMS</a>
+<a href="#personnalise">PERSONNALISÉ</a>
+<a href="#apropos">À PROPOS</a>
+<a href="#faq">FAQ</a>
+<a href="#contact">CONTACT</a>
+</nav>
 
-    <nav>
-        <a onclick="showSection('accueil')">Accueil</a>
-        <a onclick="showSection('parfums')">Parfums</a>
-        <a onclick="showSection('personnalise')">Personnalise</a>
-        <a onclick="showSection('apropos')">À propos</a>
-        <a onclick="showSection('faq')">FAQ</a>
-        <a onclick="showSection('contact')">Contact</a>
-    </nav>
+<div class="logo">MAISON AROME</div>
 
-    <div class="panier">🛒 0</div>
+<div>🛒 0</div>
 </header>
 
-<!-- ACCUEIL -->
-<section id="accueil" class="active hero">
-    <h1>Parfumerie de Luxe</h1>
-    <p>Votre parfum qui vous ressemble</p>
-    <button class="btn" onclick="showSection('parfums')">Acheter maintenant</button>
+<!-- HERO -->
+<section class="hero">
+<h1 class="gold">PARFUMERIE DE LUXE</h1>
+<h2>Bienvenue chez MAISON AROME</h2>
+<button class="btn-gold">Découvrir</button>
+<div class="scroll-indicator">⌄</div>
+</section>
+
+<!-- EID LIMITED -->
+<section>
+<h2 class="gold">ÉDITION LIMITÉE EID EL FITR</h2>
+<div class="cards">
+<div class="card">
+<div class="badge">LIMITÉ</div>
+<h3>Pack Oud Élégance</h3>
+<p>1290 MAD</p>
+</div>
+<div class="card">
+<div class="badge">LIMITÉ</div>
+<h3>Parfum + Crème</h3>
+<p>1590 MAD</p>
+</div>
+</div>
 </section>
 
 <!-- PARFUMS -->
 <section id="parfums">
-    <h1>Nos Collections</h1>
-    <div class="cards">
-        <div class="card" onclick="showSection('femme')">Collection Femme</div>
-        <div class="card" onclick="showSection('homme')">Collection Homme</div>
-    </div>
-</section>
-
-<!-- FEMME -->
-<section id="femme">
-    <h1>Collection Femme</h1>
-    <div class="cards">
-        <div class="card" onclick="showSection('produit')">
-            Rose Élégance<br>950 MAD
-        </div>
-        <div class="card">
-            Jasmin Royal<br>890 MAD
-        </div>
-    </div>
-</section>
-
-<!-- HOMME -->
-<section id="homme">
-    <h1>Collection Homme</h1>
-    <div class="cards">
-        <div class="card">
-            Oud Prestige<br>990 MAD
-        </div>
-    </div>
-</section>
-
-<!-- PRODUIT -->
-<section id="produit">
-    <div class="detail">
-        <h1>Rose Élégance</h1>
-        <p>950 MAD</p>
-
-        <div class="quantite">
-            <button onclick="moins()">-</button>
-            <span id="qte">1</span>
-            <button onclick="plus()">+</button>
-        </div>
-
-        <button class="btn">Ajouter au panier</button>
-
-        <h3>Notes Olfactives</h3>
-        <p>Tête : Bergamote</p>
-        <p>Cœur : Rose, Jasmin</p>
-        <p>Fond : Musc, Bois de santal</p>
-    </div>
+<h2 class="gold">Nos Collections</h2>
+<div class="cards">
+<div class="card"><h3>FEMME</h3><p>950 MAD</p></div>
+<div class="card"><h3>HOMME</h3><p>990 MAD</p></div>
+</div>
 </section>
 
 <!-- PERSONNALISE -->
 <section id="personnalise">
-    <h1>Création Sur Mesure</h1>
-    <p>Consultation • Choix des Arômes • Création Artisanale • Formule Exclusive</p>
-
-    <h2>Familles Olfactives</h2>
-    <p>
-    Florales : Rose, Jasmin, Tubéreuse, Iris, Pivoine, Magnolia, Gardénia<br>
-    Boisées • Orientales • Oud • Fruitée • Gourmande • Aromatique • Aquatique
-    </p>
+<h2 class="gold">Service Exclusif</h2>
+<div class="timeline">
+<div>Consultation</div>
+<div>Choix des Arômes</div>
+<div>Création</div>
+<div>Formule Exclusive</div>
+</div>
+<button class="btn-gold" style="margin-top:40px;">Créer mon parfum</button>
 </section>
 
 <!-- A PROPOS -->
 <section id="apropos">
-    <h1>À propos de MAISON AROME</h1>
-    <p>
-    MAISON AROME incarne l’excellence de la haute parfumerie.
-    Chaque création est pensée pour refléter élégance, sophistication et exclusivité.
-    </p>
+<h2 class="gold">Notre Excellence</h2>
+<div class="cards">
+<div class="card">Excellence</div>
+<div class="card">Authenticité</div>
+<div class="card">Innovation</div>
+<div class="card">Raffinement</div>
+</div>
 </section>
 
 <!-- FAQ -->
 <section id="faq">
-    <h1>FAQ</h1>
-    <p><strong>Livraison ?</strong><br>3 à 5 jours ouvrables.</p>
-    <p><strong>Paiement ?</strong><br>Paiement sécurisé.</p>
+<h2 class="gold">FAQ</h2>
+
+<div class="faq-item" onclick="toggleFAQ(this)">
+Livraison ?
+<div class="faq-answer">3 à 5 jours ouvrables.</div>
+</div>
+
+<div class="faq-item" onclick="toggleFAQ(this)">
+Paiement sécurisé ?
+<div class="faq-answer">Oui, cryptage SSL sécurisé.</div>
+</div>
+
 </section>
 
 <!-- CONTACT -->
 <section id="contact">
-    <h1>Contact</h1>
-    <p>Email : contact@maisonarome.com</p>
-    <input type="text" placeholder="Votre nom"><br><br>
-    <input type="email" placeholder="Votre email"><br><br>
-    <textarea placeholder="Votre message"></textarea><br><br>
-    <button class="btn">Envoyer</button>
+<h2 class="gold">Contact</h2>
+<p>Email : contact@maisonarome.ma</p>
+<input placeholder="Nom">
+<input placeholder="Email">
+<textarea placeholder="Message"></textarea>
+<button class="btn-gold">Envoyer</button>
 </section>
+
+<!-- FOOTER -->
+<footer>
+<div class="footer-grid">
+<div>
+<h3>MAISON AROME</h3>
+<p>Haute Parfumerie de Luxe</p>
+</div>
+<div>
+<h3>Navigation</h3>
+<p>Parfums<br>Personnalisé<br>Contact</p>
+</div>
+<div>
+<h3>Newsletter</h3>
+<input placeholder="Votre email">
+<button class="btn-gold">S'abonner</button>
+</div>
+</div>
+<p style="margin-top:40px;text-align:center;">© 2026 MAISON AROME</p>
+</footer>
 
 <script>
 
-function showSection(id) {
-    document.querySelectorAll("section").forEach(section => {
-        section.classList.remove("active");
-    });
-    document.getElementById(id).classList.add("active");
-}
+/* HEADER SCROLL */
+window.addEventListener("scroll",function(){
+document.getElementById("header").classList.toggle("scrolled",window.scrollY>50);
+});
 
-let qte = 1;
-
-function plus() {
-    qte++;
-    document.getElementById("qte").innerText = qte;
-}
-
-function moins() {
-    if(qte > 1){
-        qte--;
-        document.getElementById("qte").innerText = qte;
-    }
+/* FAQ */
+function toggleFAQ(element){
+let answer=element.querySelector(".faq-answer");
+answer.style.display=answer.style.display==="block"?"none":"block";
 }
 
 </script>
