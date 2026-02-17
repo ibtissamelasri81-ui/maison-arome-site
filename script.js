@@ -284,7 +284,7 @@ function startCountdown() {
     if (!daysEl) return;
     
     let timeLeft = {
-        days: 7,
+        days: 27,
         hours: 12,
         minutes: 45,
         seconds: 30
@@ -527,7 +527,7 @@ window.addEventListener('resize', handleResize);
 // Preload critical images
 function preloadCriticalImages() {
     const criticalImages = [
-        'https://images.unsplash.com/photo-1770301410072-f6ef6dad65b2?w=1920',
+        'https://i.postimg.cc/ZnJt5Tzh/prf-ma.jpg',
         'https://i.postimg.cc/j560xGW9/image.png',
         'https://i.postimg.cc/zvYM4p0B/im-1.jpg'
     ];
